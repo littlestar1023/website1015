@@ -538,10 +538,10 @@ function sortTableByDateTime(tableId){
 
   // 依日期+時間排序
   rows.sort((a,b)=>{
-    const dateA=a.cells[0]?.innerText || "";
-    const timeA=a.cells[1]?.innerText || "";
-    const dateB=b.cells[0]?.innerText || "";
-    const timeB=b.cells[1]?.innerText || "";
+    const dateA=a.cells[1]?.innerText || "";
+    const timeA=a.cells[2]?.innerText || "";
+    const dateB=b.cells[1]?.innerText || "";
+    const timeB=b.cells[2]?.innerText || "";
     const dtA = new Date(`${dateA} ${timeA}`);
     const dtB = new Date(`${dateB} ${timeB}`);
     return dtA - dtB; // 舊→新，如要新→舊改成 dtB - dtA
@@ -550,6 +550,20 @@ function sortTableByDateTime(tableId){
   // 重新附加排序後的列
   rows.forEach(r=>tbody.appendChild(r));
 }
+
+function saveData() {
+  localStorage.setItem("clinicData", document.getElementById("dataTable").innerHTML);
+}
+function loadData() {
+  const saved = localStorage.getItem("clinicData");
+  if(saved){
+    document.getElementById("dataTable").innerHTML = saved;
+    document.querySelector(".table-container").style.display = "block";
+    addEditButtonsToRows();
+  }
+}
+window.onload = loadData;
+
 
 function altRows(id){
   const table=document.getElementById(id);
@@ -650,7 +664,7 @@ function closeModal(){
   setReadOnly(true);
 
   // ✅ 隱藏導覽列
-  document.querySelector('.nav-1').style.display = 'none';
+  document.querySelector('.nav-1').style.display = 'flex';
 }
 
 document.getElementById("cancelEditBtn").onclick=()=>tryCloseModal();
