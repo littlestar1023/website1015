@@ -51,41 +51,44 @@
   </div>
 
   <script>
-    const content = document.getElementById('content');
-    const raw = localStorage.getItem('lastVolunteer');
-    // 顯示頭像：若無頭像則使用預設圖
-      const avatarImg = document.getElementById("avatarDisplay");
-      avatarImg.src = data.avatar && data.avatar.trim() ? data.avatar : "default-avatar.png";
+  const content = document.getElementById('content');
+  const avatarImg = document.getElementById("volunteerAvatar");
+  const volunteerName = document.getElementById("volunteerName");
+  const raw = localStorage.getItem('lastVolunteer');
 
+  if (!raw) {
+    content.innerHTML = '<p class="empty">目前沒有任何使用者資料。</p>';
+  } else {
+    try {
+      // 取最後一筆資料
+      const list = JSON.parse(raw);
+      const d = Array.isArray(list) ? list[list.length - 1] : list;
 
-    if (!raw) {
-      content.innerHTML = '<p class="empty">目前沒有任何使用者資料。</p>';
-    } else {
-      try {
-        // 取最後一筆（最新填寫的資料）
-        const list = JSON.parse(raw);
-        const d = list[list.length - 1];
-        // 如果沒有頭像，就顯示預設圖
-        avatar.src = d.avatar && d.avatar.trim() !== "" ? d.avatar : "default-avatar.png";
-        const html = [
-          '<dl>',
-            `<dt>姓名</dt><dd>${d.name || ''}</dd>`,
-            `<dt>Email</dt><dd>${d.email || ''}</dd>`,
-            `<dt>電話</dt><dd>${d.phone || ''}</dd>`,
-            `<dt>出生年月日</dt><dd>${d.birthday || ''}</dd>`,
-            `<dt>性別</dt><dd>${d.gender || ''}</dd>`,
-            `<dt>地址</dt><dd>${d.address || ''}</dd>`,
-            `<dt>專長/服務項目</dt><dd>${d.skills || ''}</dd>`,
-            `<dt>個性標籤</dt><dd>${d.tags || ''}</dd>`,
-            `<dt>簡介</dt><dd>${(d.desc || '').replace(/\n/g,'<br>')}</dd>`,
-          '</dl>'
-        ].join('');
-        content.innerHTML = html;
-      }catch(e){
-        content.innerHTML = '<p class="empty">資料解析錯誤。</p>';
-        console.error(e);
-      }
+      // 顯示頭像與姓名（導覽列）
+      avatarImg.src = d.avatar && d.avatar.trim() !== "" ? d.avatar : "default-avatar.png";
+      volunteerName.textContent = d.name || "未登入";
+
+      // 顯示詳細資料
+      const html = `
+        <dl>
+          <dt>姓名</dt><dd>${d.name || ''}</dd>
+          <dt>Email</dt><dd>${d.email || ''}</dd>
+          <dt>電話</dt><dd>${d.phone || ''}</dd>
+          <dt>出生年月日</dt><dd>${d.birthday || ''}</dd>
+          <dt>性別</dt><dd>${d.gender || ''}</dd>
+          <dt>地址</dt><dd>${d.address || ''}</dd>
+          <dt>專長/服務項目</dt><dd>${d.skills || ''}</dd>
+          <dt>個性標籤</dt><dd>${d.tags || ''}</dd>
+          <dt>簡介</dt><dd>${(d.desc || '').replace(/\n/g,'<br>')}</dd>
+        </dl>
+      `;
+      content.innerHTML = html;
+    } catch (e) {
+      content.innerHTML = '<p class="empty">資料解析錯誤。</p>';
+      console.error(e);
     }
-  </script>
+  }
+</script>
+
 </body>
 </html>
