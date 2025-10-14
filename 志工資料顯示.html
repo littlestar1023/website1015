@@ -58,11 +58,15 @@
       avatarImg.src = data.avatar && data.avatar.trim() ? data.avatar : "default-avatar.png";
 
 
-    if(!raw){
-      content.innerHTML = '<p class="empty">沒有找到志工資料。請先在填寫頁面按「送出」。</p>';
+    if (!raw) {
+      content.innerHTML = '<p class="empty">目前沒有任何使用者資料。</p>';
     } else {
-      try{
-        const d = JSON.parse(raw);
+      try {
+        // 取最後一筆（最新填寫的資料）
+        const list = JSON.parse(raw);
+        const d = list[list.length - 1];
+        // 如果沒有頭像，就顯示預設圖
+        avatar.src = d.avatar && d.avatar.trim() !== "" ? d.avatar : "default-avatar.png";
         const html = [
           '<dl>',
             `<dt>姓名</dt><dd>${d.name || ''}</dd>`,
