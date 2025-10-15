@@ -82,8 +82,8 @@
 <body>
   <!-- 導覽列 -->
 <nav class="nav-1">
-  <div style="display:flex; align-items:center; gap:12px;">
-    <h1 style="margin:0;">志工個人資料</h1>
+  <div>
+    <h1>志工個人資料</h1>
   </div>
 
   <div style="display:flex; align-items:center;">
@@ -123,7 +123,6 @@
       // 顯示詳細資料
       const html = `
         <dl>
-          <dt>頭像</dt><dd><img src="${d.avatar || ''}" alt="頭像" class="avatar"></dd>
           <dt>姓名</dt><dd>${d.name || ''}</dd>
           <dt>Email</dt><dd>${d.email || ''}</dd>
           <dt>電話</dt><dd>${d.phone || ''}</dd>
