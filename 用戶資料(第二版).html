@@ -211,7 +211,9 @@
 
       // 若未登入 → 自動導向 LINE 登入，登入後會回到這頁
       if (!liff.isLoggedIn()) {
-         liff.login({ redirectUri: window.location.href });
+         liff.login({
+          redirectUri: "https://littlestar1023.github.io/website1015/用戶資料(第二版).html"
+        });
         return;
       }
 
@@ -224,12 +226,16 @@
       // ✅ 初始化時先載入 LINE 頭像
       const profile = await liff.getProfile();
       
-      // 安全設定：如果沒有頭像就用預設
+      // 設定頭像與名稱
       if (profile && profile.pictureUrl) {
         avatarEl.src = profile.pictureUrl;
       } else {
         avatarEl.src = "default-avatar.png";
       }
+
+      // 可顯示使用者名稱（若你想在頁面中顯示）
+      const nameEl = document.getElementById("volunteerName");
+      if (nameEl) nameEl.textContent = profile.displayName || "志工";
 
     } catch (err) {
       console.warn("⚠️ LIFF 初始化或抓取資料失敗，改用預設頭像", err);
