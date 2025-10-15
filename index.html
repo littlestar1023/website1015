@@ -707,12 +707,16 @@ const LIFF_ID = "2008228534-R8763A2n"; // 你的 LIFF ID
 const avatarEl = document.getElementById("volunteerAvatar");
 const nameEl = document.getElementById("volunteerName");
 
-  // 點擊頭像：若已登入 → 前往個資頁；未登入 → 登入
+  // 點擊頭像：若已登入 → 前往個資頁； → 登入
 avatarEl.addEventListener("click", () => {
   if (liff.isLoggedIn()) {
-    window.location.href = "用戶資料(第二版).html";  
+    // 已登入，直接前往個資頁
+    window.location.href = "用戶資料(第二版).html";
   } else {
-    liff.login();
+    // 尚未登入，登入完自動回到個資頁
+    liff.login({
+      redirectUri: window.location.origin + "/用戶資料(第二版).html"
+    });
   }
 });
 
