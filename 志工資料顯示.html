@@ -5,15 +5,62 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>志工資料顯示</title>
   <style>
-    body{font-family:"Segoe UI",sans-serif;background:#f4f6f8;margin:0;padding:20px}
-    .card{max-width:720px;margin:24px auto;background:#fff;padding:20px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.08)}
-    h1{margin:0 0 12px 0;font-size:20px}
-    dl{display:grid;grid-template-columns:140px 1fr;gap:8px 16px}
-    dt{font-weight:700;color:#333}
-    dd{margin:0;color:#222}
-    .back{display:inline-block;margin-top:16px;padding:8px 14px;background:#0078d4;color:#fff;border-radius:6px;text-decoration:none}
-    .empty{color:#666}
-
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+    .card {
+      max-width: 720px;
+      margin: 24px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    h1 {
+      margin: 0 0 16px 0;
+      font-size: 22px;
+    }
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #0078d4;
+      margin-bottom: 16px;
+    }
+    dl {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 8px 16px;
+      text-align: left;
+      margin-top: 10px;
+    }
+    dt {
+      font-weight: 700;
+      color: #333;
+    }
+    dd {
+      margin: 0;
+      color: #222;
+      word-break: break-word;
+    }
+    .back {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 8px 14px;
+      background: #0078d4;
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+    .empty {
+      color: #666;
+    }
+    
      /* 導覽列 */
     .nav-1 {
       display: flex;
