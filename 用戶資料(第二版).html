@@ -265,6 +265,7 @@
     e.preventDefault();
     const form = e.target;
     const data = {
+      avatar: document.getElementById("avatarPreview").src,
       volunteerId: form.elements["volunteerId"].value.trim(),
       name: form.elements["name"].value.trim(),
       email: form.elements["email"].value.trim(),
@@ -285,6 +286,7 @@
     e.preventDefault();
     const form = e.target;
     const data = {
+      avatar: document.getElementById("avatarPreview").src,
       name: form.elements["name"].value.trim(),
       phone: form.elements["phone"].value.trim(),
       birthday: form.elements["birthday"].value,
